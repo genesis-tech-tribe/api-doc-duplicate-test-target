@@ -1,0 +1,3 @@
+[submodule "docs"]
+	path = docs
+	url = https://github.com/genesis-tech-tribe/api-doc-duplicate-test.git
