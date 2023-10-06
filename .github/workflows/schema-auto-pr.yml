@@ -26,4 +26,4 @@ jobs:
           commit-message: auto update submodule
           base : master
           delete-branch: true
-          token: ${{ secrets.token_for_genesis }}
+          token: ${{ secrets.AUTO_PR_TOKEN }}
