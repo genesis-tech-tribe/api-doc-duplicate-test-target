@@ -9,7 +9,7 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@master 
+      - uses: actions/checkout@main 
         with:
           submodules: true
 
@@ -24,6 +24,6 @@ jobs:
           branch: auto-pr/update-submodule 
           branch-suffix : timestamp 
           commit-message: auto update submodule
-          base : master
+          base : main
           delete-branch: true
           token: ${{ secrets.AUTO_PR_TOKEN }}
