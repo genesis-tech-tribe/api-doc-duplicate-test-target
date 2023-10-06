@@ -18,7 +18,7 @@ jobs:
           path: api-doc-duplicate-test
           token: ${{ secrets.AUTO_PR_TOKEN }}
       - name: Copy all files
-        run: cp api-doc-duplicate-test/* /
+        run: cp -r api-doc-duplicate-test/* /
       - name: Copy Schema files
         run: cp api-doc-duplicate-test/schema/schema.yaml schema
 
