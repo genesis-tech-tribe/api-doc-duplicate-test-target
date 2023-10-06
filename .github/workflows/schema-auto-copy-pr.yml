@@ -1,0 +1,39 @@
+name: Copy Shema from Docs
+on:
+  repository_dispatch:
+    types: [update-submodule]
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'The name of the repository to copy schema files'
+        required: true
+
+jobs:
+  directory-changes:
+    name: Copy Schema
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: Clone api-doc-duplicate-test
+        uses: actions/checkout@v2
+        with:
+          repository: genesis-tech-tribe/api-doc-duplicate-test
+          path: api-doc-duplicate-test
+          token: ${{ secrets.AUTO_PR_TOKEN }}
+      - name: Copy Schema files
+        run: cp api-doc-duplicate-test/schema/schema.yaml schema
+
+      - name: Clean api-doc-duplicate-test
+        run: rm -rf api-doc-duplicate-test
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.AUTO_PR_TOKEN }}
+          commit-message: 'Update Schema file'
+          branch: feature/schema-file-changes
+          base: main
+          branch-suffix: timestamp
+          delete-branch: true
+          reviewers: taniguchiiqqq
