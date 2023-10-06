@@ -17,9 +17,7 @@ jobs:
           repository: genesis-tech-tribe/api-doc-duplicate-test
           path: api-doc-duplicate-test
           token: ${{ secrets.AUTO_PR_TOKEN }}
-      - name: Copy all files
-        run: cp -r api-doc-duplicate-test/schema/* schema
-      - name: Copy Schema files
+      - name: Copy Schema file
         run: cp api-doc-duplicate-test/schema/schema.yml schema/schema.yml
 
       - name: Clean api-doc-duplicate-test
