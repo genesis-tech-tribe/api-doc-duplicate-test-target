@@ -23,7 +23,7 @@ jobs:
         with:
           repository: genesis-tech-tribe/api-doc-duplicate-test
           path: api-doc-duplicate-test
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
       - name: Copy Schema file
         run: cp api-doc-duplicate-test/schema/schema.yml schema/schema.yml
 
@@ -33,7 +33,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
           commit-message: 'Update Schema file'
           branch: feature/schema-file-changes
           base: main
