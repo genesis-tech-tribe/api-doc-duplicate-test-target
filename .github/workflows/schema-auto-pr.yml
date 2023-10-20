@@ -32,4 +32,4 @@ jobs:
           commit-message: auto update submodule
           base : main
           delete-branch: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
