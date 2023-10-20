@@ -8,6 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_SECRET }}
 
       - uses: actions/checkout@main 
         with:
@@ -26,4 +32,4 @@ jobs:
           commit-message: auto update submodule
           base : main
           delete-branch: true
-          token: ${{ secrets.AUTO_PR_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -9,6 +9,13 @@ jobs:
     name: Copy Schema
     runs-on: ubuntu-latest
     steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_SECRET }}
+
       - name: Clone
         uses: actions/checkout@v2
       - name: Clone api-doc-duplicate-test
@@ -16,7 +23,7 @@ jobs:
         with:
           repository: genesis-tech-tribe/api-doc-duplicate-test
           path: api-doc-duplicate-test
-          token: ${{ secrets.AUTO_PR_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Copy Schema file
         run: cp api-doc-duplicate-test/schema/schema.yml schema/schema.yml
 
@@ -26,7 +33,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.AUTO_PR_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Update Schema file'
           branch: feature/schema-file-changes
           base: main
